@@ -4739,15 +4739,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_core_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./@core/core.module */ 43127);
 /* harmony import */ var _theme_theme_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./@theme/theme.module */ 19466);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ 55041);
+/* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/fire/storage */ 68274);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app-routing.module */ 90158);
 /* harmony import */ var _nebular_theme__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @nebular/theme */ 42522);
 /* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./login/login.component */ 98458);
+/* harmony import */ var _angular_fire__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/fire */ 50057);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 37716);
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+
+
+
 
 
 
@@ -4793,12 +4798,22 @@ AppModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵ
             _theme_theme_module__WEBPACK_IMPORTED_MODULE_4__.ThemeModule.forRoot(),
             _angular_forms__WEBPACK_IMPORTED_MODULE_13__.FormsModule,
             _angular_forms__WEBPACK_IMPORTED_MODULE_13__.ReactiveFormsModule,
+            _angular_fire_storage__WEBPACK_IMPORTED_MODULE_14__.AngularFireStorageModule,
+            _angular_fire__WEBPACK_IMPORTED_MODULE_15__.AngularFireModule.initializeApp({
+                apiKey: "AIzaSyASBN2USw1lXMe7Q_uD8rulF4tTNFF1IdA",
+                authDomain: "ictk-98c09.firebaseapp.com",
+                projectId: "ictk-98c09",
+                storageBucket: "ictk-98c09.appspot.com",
+                messagingSenderId: "222073145809",
+                appId: "1:222073145809:web:ae9b2d368d4f8f605b78f0"
+            })
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_5__.AppComponent, _login_login_component__WEBPACK_IMPORTED_MODULE_7__.LoginComponent], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule,
         _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_11__.BrowserAnimationsModule,
         _angular_common_http__WEBPACK_IMPORTED_MODULE_9__.HttpClientModule,
         _app_routing_module__WEBPACK_IMPORTED_MODULE_6__.AppRoutingModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbSidebarModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbMenuModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbDatepickerModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbDialogModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbWindowModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbToastrModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbChatModule, _core_core_module__WEBPACK_IMPORTED_MODULE_3__.CoreModule, _theme_theme_module__WEBPACK_IMPORTED_MODULE_4__.ThemeModule, _angular_forms__WEBPACK_IMPORTED_MODULE_13__.FormsModule,
-        _angular_forms__WEBPACK_IMPORTED_MODULE_13__.ReactiveFormsModule] }); })();
+        _angular_forms__WEBPACK_IMPORTED_MODULE_13__.ReactiveFormsModule,
+        _angular_fire_storage__WEBPACK_IMPORTED_MODULE_14__.AngularFireStorageModule, _angular_fire__WEBPACK_IMPORTED_MODULE_15__.AngularFireModule] }); })();
 
 
 /***/ }),
@@ -4862,7 +4877,7 @@ class AuthService {
         //  server_address :string ='http://localhost:5000';
         this.server_address = '/api';
     }
-    loginUser1(user) {
+    loginUser(user) {
         return this.http.post(`${this.server_address}/login`, user);
     }
     loggedIn() {
@@ -4928,7 +4943,7 @@ class LoginComponent {
     ngOnInit() {
     }
     loginUser() {
-        this._auth.loginUser1(this.user)
+        this._auth.loginUser(this.user)
             .subscribe(response => {
             let result = response;
             if (result.status) {
@@ -5008,9 +5023,9 @@ __webpack_require__.r(__webpack_exports__);
 class CoursesService {
     constructor(http) {
         this.http = http;
-        //  server_address :string ='http://localhost:5000';
         this.server_address = '/api';
     }
+    // server_address :string ='http://localhost:5000';
     getCourses() {
         return this.http.get(`${this.server_address}/course/CourseList`);
     }
@@ -5020,7 +5035,6 @@ class CoursesService {
     }
     ;
     session_out() {
-        console.log("loging out");
         this.http.get(`${this.server_address}/logout`);
     }
     ;
@@ -5033,70 +5047,18 @@ class CoursesService {
     }
     ;
     updateCourseIndex(course) {
-        return this.http.put(`${this.server_address}/course/Course/updateIndex/`, course);
+        return this.http.put(`${this.server_address}/course/Course/updateIndex`, course);
     }
     ;
     editCourse(Course) {
-        console.log(`editCourse : ${Course.title}`);
-        return this.http.put(`${this.server_address}/course/Course/update`, Course);
+        return this.http.post(`${this.server_address}/course/Course/update`, Course);
     }
     ;
-    editCourseWithImage(image, course) {
-        const formData = new FormData();
-        for (let i = 0; i < image.length; i++) {
-            formData.append("files", image[i], image[i]['name']);
-            console.log(`${i} ${image[i]}`);
-        }
-        formData.append('_id', course._id);
-        formData.append('course_title', course.course_title);
-        formData.append('course_image', course.course_image);
-        formData.append('course_short_desc', course.course_short_desc);
-        formData.append('Reg_Status', course.Reg_Status);
-        formData.append('Category', course.Category);
-        formData.append('Rating', course.Rating);
-        formData.append('about_course', course.about_course);
-        formData.append('dates', course.dates);
-        formData.append('eligibility', course.eligibility);
-        formData.append('course_fee', course.course_fee);
-        formData.append('entrance_details', course.entrance_details);
-        formData.append('refund_policy', course.refund_policy);
-        formData.append('course_delivery', course.course_delivery);
-        formData.append('internship_partner', course.internship_partner);
-        formData.append('knowledge_partner', course.knowledge_partner);
-        formData.append('sponser_partner', course.sponser_partner);
-        formData.append('active', course.active);
-        return this.http.put(`${this.server_address}/course/Course/updateWithFile`, formData);
-    }
-    ;
-    newCourse(image, course) {
-        console.log('inside service upload');
-        const formData = new FormData();
-        for (let i = 0; i < image.length; i++) {
-            formData.append("files", image[i], image[i]['name']);
-            console.log(`${i} ${image[i]}`);
-        }
-        formData.append('course_title', course.course_title);
-        formData.append('course_image', course.course_image);
-        formData.append('course_short_desc', course.course_short_desc);
-        formData.append('Reg_Status', course.Reg_Status);
-        formData.append('Category', course.Category);
-        formData.append('Rating', course.Rating);
-        formData.append('about_course', course.about_course);
-        formData.append('dates', course.dates);
-        formData.append('eligibility', course.eligibility);
-        formData.append('course_fee', course.course_fee);
-        formData.append('entrance_details', course.entrance_details);
-        formData.append('refund_policy', course.refund_policy);
-        formData.append('course_delivery', course.course_delivery);
-        formData.append('internship_partner', course.internship_partner);
-        formData.append('knowledge_partner', course.knowledge_partner);
-        formData.append('sponser_partner', course.sponser_partner);
-        formData.append('active', course.active);
-        return this.http.post(`${this.server_address}/course/Course/insert`, formData);
+    newCourse(course) {
+        return this.http.post(`${this.server_address}/course/Course/insert`, course);
     }
     deleteCourse(Course) {
-        console.log(`inside server ${Course}`);
-        return this.http.post(`${this.server_address}/course/Course/remove/`, Course);
+        return this.http.post(`${this.server_address}/course/Course/remove`, Course);
     }
 }
 CoursesService.ɵfac = function CoursesService_Factory(t) { return new (t || CoursesService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient)); };

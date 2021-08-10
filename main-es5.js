@@ -7606,6 +7606,12 @@
       /* harmony import */
 
 
+      var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      /*! @angular/fire/storage */
+      68274);
+      /* harmony import */
+
+
       var _app_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ./app-routing.module */
       90158);
@@ -7621,6 +7627,12 @@
       var _login_login_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ./login/login.component */
       98458);
+      /* harmony import */
+
+
+      var _angular_fire__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      /*! @angular/fire */
+      50057);
       /* harmony import */
 
 
@@ -7654,13 +7666,20 @@
         }],
         imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_11__.BrowserAnimationsModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_9__.HttpClientModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_6__.AppRoutingModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbSidebarModule.forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbMenuModule.forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbDatepickerModule.forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbDialogModule.forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbWindowModule.forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbToastrModule.forRoot(), _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbChatModule.forRoot({
           messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY'
-        }), _core_core_module__WEBPACK_IMPORTED_MODULE_3__.CoreModule.forRoot(), _theme_theme_module__WEBPACK_IMPORTED_MODULE_4__.ThemeModule.forRoot(), _angular_forms__WEBPACK_IMPORTED_MODULE_13__.FormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_13__.ReactiveFormsModule]]
+        }), _core_core_module__WEBPACK_IMPORTED_MODULE_3__.CoreModule.forRoot(), _theme_theme_module__WEBPACK_IMPORTED_MODULE_4__.ThemeModule.forRoot(), _angular_forms__WEBPACK_IMPORTED_MODULE_13__.FormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_13__.ReactiveFormsModule, _angular_fire_storage__WEBPACK_IMPORTED_MODULE_14__.AngularFireStorageModule, _angular_fire__WEBPACK_IMPORTED_MODULE_15__.AngularFireModule.initializeApp({
+          apiKey: "AIzaSyASBN2USw1lXMe7Q_uD8rulF4tTNFF1IdA",
+          authDomain: "ictk-98c09.firebaseapp.com",
+          projectId: "ictk-98c09",
+          storageBucket: "ictk-98c09.appspot.com",
+          messagingSenderId: "222073145809",
+          appId: "1:222073145809:web:ae9b2d368d4f8f605b78f0"
+        })]]
       });
 
       (function () {
         (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵsetNgModuleScope"](_AppModule, {
           declarations: [_app_component__WEBPACK_IMPORTED_MODULE_5__.AppComponent, _login_login_component__WEBPACK_IMPORTED_MODULE_7__.LoginComponent],
-          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_11__.BrowserAnimationsModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_9__.HttpClientModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_6__.AppRoutingModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbSidebarModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbMenuModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbDatepickerModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbDialogModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbWindowModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbToastrModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbChatModule, _core_core_module__WEBPACK_IMPORTED_MODULE_3__.CoreModule, _theme_theme_module__WEBPACK_IMPORTED_MODULE_4__.ThemeModule, _angular_forms__WEBPACK_IMPORTED_MODULE_13__.FormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_13__.ReactiveFormsModule]
+          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_11__.BrowserAnimationsModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_9__.HttpClientModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_6__.AppRoutingModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbSidebarModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbMenuModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbDatepickerModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbDialogModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbWindowModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbToastrModule, _nebular_theme__WEBPACK_IMPORTED_MODULE_12__.NbChatModule, _core_core_module__WEBPACK_IMPORTED_MODULE_3__.CoreModule, _theme_theme_module__WEBPACK_IMPORTED_MODULE_4__.ThemeModule, _angular_forms__WEBPACK_IMPORTED_MODULE_13__.FormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_13__.ReactiveFormsModule, _angular_fire_storage__WEBPACK_IMPORTED_MODULE_14__.AngularFireStorageModule, _angular_fire__WEBPACK_IMPORTED_MODULE_15__.AngularFireModule]
         });
       })();
       /***/
@@ -7783,8 +7802,8 @@
         }
 
         _createClass(_AuthService, [{
-          key: "loginUser1",
-          value: function loginUser1(user) {
+          key: "loginUser",
+          value: function loginUser(user) {
             return this.http.post("".concat(this.server_address, "/login"), user);
           }
         }, {
@@ -7911,7 +7930,7 @@
           value: function loginUser() {
             var _this33 = this;
 
-            this._auth.loginUser1(this.user).subscribe(function (response) {
+            this._auth.loginUser(this.user).subscribe(function (response) {
               var result = response;
 
               if (result.status) {
@@ -8068,10 +8087,10 @@
         function _CoursesService(http) {
           _classCallCheck(this, _CoursesService);
 
-          this.http = http; //  server_address :string ='http://localhost:5000';
-
+          this.http = http;
           this.server_address = '/api';
-        }
+        } // server_address :string ='http://localhost:5000';
+
 
         _createClass(_CoursesService, [{
           key: "getCourses",
@@ -8086,7 +8105,6 @@
         }, {
           key: "session_out",
           value: function session_out() {
-            console.log("loging out");
             this.http.get("".concat(this.server_address, "/logout"));
           }
         }, {
@@ -8102,79 +8120,22 @@
         }, {
           key: "updateCourseIndex",
           value: function updateCourseIndex(course) {
-            return this.http.put("".concat(this.server_address, "/course/Course/updateIndex/"), course);
+            return this.http.put("".concat(this.server_address, "/course/Course/updateIndex"), course);
           }
         }, {
           key: "editCourse",
           value: function editCourse(Course) {
-            console.log("editCourse : ".concat(Course.title));
-            return this.http.put("".concat(this.server_address, "/course/Course/update"), Course);
-          }
-        }, {
-          key: "editCourseWithImage",
-          value: function editCourseWithImage(image, course) {
-            var formData = new FormData();
-
-            for (var i = 0; i < image.length; i++) {
-              formData.append("files", image[i], image[i]['name']);
-              console.log("".concat(i, " ").concat(image[i]));
-            }
-
-            formData.append('_id', course._id);
-            formData.append('course_title', course.course_title);
-            formData.append('course_image', course.course_image);
-            formData.append('course_short_desc', course.course_short_desc);
-            formData.append('Reg_Status', course.Reg_Status);
-            formData.append('Category', course.Category);
-            formData.append('Rating', course.Rating);
-            formData.append('about_course', course.about_course);
-            formData.append('dates', course.dates);
-            formData.append('eligibility', course.eligibility);
-            formData.append('course_fee', course.course_fee);
-            formData.append('entrance_details', course.entrance_details);
-            formData.append('refund_policy', course.refund_policy);
-            formData.append('course_delivery', course.course_delivery);
-            formData.append('internship_partner', course.internship_partner);
-            formData.append('knowledge_partner', course.knowledge_partner);
-            formData.append('sponser_partner', course.sponser_partner);
-            formData.append('active', course.active);
-            return this.http.put("".concat(this.server_address, "/course/Course/updateWithFile"), formData);
+            return this.http.post("".concat(this.server_address, "/course/Course/update"), Course);
           }
         }, {
           key: "newCourse",
-          value: function newCourse(image, course) {
-            console.log('inside service upload');
-            var formData = new FormData();
-
-            for (var i = 0; i < image.length; i++) {
-              formData.append("files", image[i], image[i]['name']);
-              console.log("".concat(i, " ").concat(image[i]));
-            }
-
-            formData.append('course_title', course.course_title);
-            formData.append('course_image', course.course_image);
-            formData.append('course_short_desc', course.course_short_desc);
-            formData.append('Reg_Status', course.Reg_Status);
-            formData.append('Category', course.Category);
-            formData.append('Rating', course.Rating);
-            formData.append('about_course', course.about_course);
-            formData.append('dates', course.dates);
-            formData.append('eligibility', course.eligibility);
-            formData.append('course_fee', course.course_fee);
-            formData.append('entrance_details', course.entrance_details);
-            formData.append('refund_policy', course.refund_policy);
-            formData.append('course_delivery', course.course_delivery);
-            formData.append('internship_partner', course.internship_partner);
-            formData.append('knowledge_partner', course.knowledge_partner);
-            formData.append('sponser_partner', course.sponser_partner);
-            formData.append('active', course.active);
-            return this.http.post("".concat(this.server_address, "/course/Course/insert"), formData);
+          value: function newCourse(course) {
+            return this.http.post("".concat(this.server_address, "/course/Course/insert"), course);
           }
         }, {
           key: "deleteCourse",
           value: function deleteCourse(Course) {
-            console.log("inside server ".concat(Course));
-            return this.http.post("".concat(this.server_address, "/course/Course/remove/"), Course);
+            return this.http.post("".concat(this.server_address, "/course/Course/remove"), Course);
           }
         }]);
 
